@@ -8,7 +8,6 @@ class Problem {
     public: 
         vector<int> puzzle;
         vector<int> goal_state = {1,2,3,4,5,6,7,8,0};
-        string operators;
         //cost from initial to current
         int gn_cost;
         //initialize problem with new puzzle
@@ -20,10 +19,18 @@ class Problem {
         Problem* down();
         Problem* left();
         Problem* right();
+        void expandNode();
+
+        //pointers to parent and children of the current node
         Problem* parent;
+        Problem* upChild;
+        Problem* downChild;
+        Problem* leftChild;
+        Problem* rightChild;
+
         int findZero();
 
 };
 
 
-#endif
+#endif //PROBLEM_H_

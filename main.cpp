@@ -1,8 +1,10 @@
 #include "problem.h"
+#include "algorithms.h"
 #include <iostream>
 #include <array>
 #include <vector>
 using namespace std;
+
 
 int main() {
     int userInput = 0;
@@ -49,11 +51,23 @@ int main() {
         cout << "Invalid Entry" << endl;
         cout << "Choose which algorithm you want to implement" << endl;
         cout << "1. Uniform Cost Search" << endl;
-        cout << "2. A*" << endl;
-        cout << "3. A*" << endl;
+        cout << "2. A* with the Misplaced Tile Heuristic" << endl;
+        cout << "3. A* with the Euclidean Distance Heuristic" << endl;
         cin >> userInput;
     }
-    
+
+    Problem* startNode = new Problem(newPuzzle);
+
+    if (userInput == 1) {
+        uniformCostSearch(startNode);
+
+    }
+    else if(userInput == 2) {
+        //A* with the Misplaced Tile Heuristic
+    }
+    else if(userInput == 3) {
+        //A* with the Euclidean Distance Heuristic
+    }
 
     return 0;
 }
