@@ -1,12 +1,21 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
+#include <functional>
 #include "algorithms.h"
 
 using namespace std;
 
+//referenced https://www.technical-recipes.com/2011/priority-queues-and-min-priority-queues-in-c/ 
+struct compare {
+  bool operator()(const Problem *a, const Problem *b) const {
+    return a->gn_cost > b->gn_cost;
+  }
+};
+
 //referenced https://www.geeksforgeeks.org/priority-queue-in-cpp-stl/
-priority_queue<Problem*, vector<Problem*>, greater<Problem*>> frontier;
+priority_queue<Problem*, vector<Problem*>, /*greater<Problem*>*/compare> frontier;
 vector<Problem*> exploredSet;
 
 void uniformCostSearch(Problem* initialState) {
@@ -15,80 +24,152 @@ void uniformCostSearch(Problem* initialState) {
         return;
     }
     frontier.push(initialState);
+    cout << "Added initial node to frontier" << endl;
     Problem* currNode;
 
-    //while you haven't reached the goal state keep exploring 
-    while(!frontier.top()->goalTest()) {
-        //if frontier is empty return failure
-        if(frontier.empty()) {
+    //while the frontier is not empty keep searching
+    while(!frontier.empty()) {
+        currNode = frontier.top();
+        frontier.pop();
+        cout << "Assigned frontier top to a current node for exploring and popped from frontier" << endl;
+        
+        //if the current node matches the goal state exit while loop and return 
+        if(currNode->goalTest()) {
+            cout << "Goal!!" << endl;
             return;
         }
-        vector<Problem*>::iterator it;
-        it = find(exploredSet.begin(), exploredSet.end(), frontier.top());
-
-        if(it != exploredSet.end()) {
-            //remove node from the frontier because it is already in the explored set
-            frontier.pop();
-        }
-    
+        //current node does not match goal state so keep searching 
         else {
-            //explore the node at front of frontier by creating its children
-            currNode = frontier.top();
+            //explore the current node by creating its children
             currNode->expandNode();
+            cout << "Expanded children of current node" << endl;
 
             //if the child is not null checks if it is already in the explored set
             //if child is already in explored set don't add it to the frontier else add it to the frontier
             if(currNode->upChild != NULL) {
-                vector<Problem*>::iterator it;
-                it = find(exploredSet.begin(), exploredSet.end(), currNode->upChild);
-                if(it != exploredSet.end()) {
-                    //dont add to frontier
+                bool found = false;
+                vector<Problem *>::iterator iter;
+                for (iter = exploredSet.begin(); iter != exploredSet.end(); iter++) {
+                    vector<int> search = (*iter)->puzzle;
+                    for (int i = 0; i < search.size(); i++) {
+                        if (search.at(i) == currNode->upChild->puzzle.at(i)) {
+                            // keep comparing
+                            found = true;
+                        } 
+                        else {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    } 
+                    else {
+                        // move on to next node and compare those 2
+                    }
                 }
+                //child node was found in the explored set so don't add to frontier
+                if (found) {
+                    cout << "Already explored up child" << endl;
+                } 
+                //child node was not found in explored set so add it to the rontier
                 else {
                     frontier.push(currNode->upChild);
+                    cout << "Added up child" << endl;
                 }
             }
             if(currNode->downChild != NULL) {
-                vector<Problem*>::iterator it;
-                it = find(exploredSet.begin(), exploredSet.end(), currNode->downChild);
-                if(it != exploredSet.end()) {
-                    //dont add to frontier
+                bool found = false;
+                vector<Problem *>::iterator iter;
+                for (iter = exploredSet.begin(); iter != exploredSet.end(); iter++) {
+                    vector<int> search = (*iter)->puzzle;
+                    for (int i = 0; i < search.size(); i++) {
+                        if (search.at(i) == currNode->downChild->puzzle.at(i)) {
+                            // keep comparing
+                            found = true;
+                        } 
+                        else {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    }
                 }
+                //child node was found in the explored set so don't add to frontier
+                if (found) {
+                cout << "Already explored down child" << endl;
+                } 
+                //child node was not found in explored set so add it to the rontier
                 else {
                     frontier.push(currNode->downChild);
+                    cout << "Added down child" << endl;
                 }
             }
             if(currNode->leftChild != NULL) {
-                vector<Problem*>::iterator it;
-                it = find(exploredSet.begin(), exploredSet.end(), currNode->leftChild);
-                if(it != exploredSet.end()) {
-                    //dont add to frontier
+                bool found = false;
+                 vector<Problem *>::iterator iter;
+                for (iter = exploredSet.begin(); iter != exploredSet.end(); iter++) {
+                    vector<int> search = (*iter)->puzzle;
+                    for (int i = 0; i < search.size(); i++) {
+                        if (search.at(i) == currNode->leftChild->puzzle.at(i)) {
+                            // keep comparing
+                            found = true;
+                        } 
+                        else {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    }
                 }
+                //child node was found in the explored set so don't add to frontier
+                 if (found) {
+                    cout << "Already explored left child" << endl;
+                } 
+                //child node was not found in explored set so add it to the rontier
                 else {
                     frontier.push(currNode->leftChild);
+                    cout << "Added left child" << endl;
                 }
             }
             if(currNode->rightChild != NULL) {
-                vector<Problem*>::iterator it;
-                it = find(exploredSet.begin(), exploredSet.end(), currNode->rightChild);
-                if(it != exploredSet.end()) {
-                    //dont add to frontier
+                bool found = false;
+                vector<Problem *>::iterator iter;
+                for (iter = exploredSet.begin(); iter != exploredSet.end(); iter++) {
+                    vector<int> search = (*iter)->puzzle;
+                    for (int i = 0; i < search.size(); i++) {
+                        if (search.at(i) == currNode->rightChild->puzzle.at(i)) {
+                            // keep comparing
+                            found = true;
+                        } 
+                        else {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    }
                 }
+                //child node was found in the explored set so don't add to frontier
+                if (found) {
+                    cout << "Already explored right child" << endl;
+                } 
+                 //child node was not found in explored set so add it to the rontier
                 else {
                     frontier.push(currNode->rightChild);
+                    cout << "Added right child" << endl;
                 }
             }
+            //add current node to explored set and pop it from the frontier
+            exploredSet.push_back(currNode);
+            cout << "Added node to explored set" << endl;
+
         }
-        cout << "Goal!!" << endl;
-        cout << frontier.top()->puzzle.at(0) << " ";
-        cout << frontier.top()->puzzle.at(1) << " ";
-        cout << frontier.top()->puzzle.at(2) << endl;
-        cout << frontier.top()->puzzle.at(3) << " ";
-        cout << frontier.top()->puzzle.at(4) << " ";
-        cout << frontier.top()->puzzle.at(5) << endl;
-        cout << frontier.top()->puzzle.at(6) << " ";
-        cout << frontier.top()->puzzle.at(7) << " ";
-        cout << frontier.top()->puzzle.at(8) << endl;
 
     }
 }

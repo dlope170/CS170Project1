@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
     int userInput = 0;
-    vector<int> newPuzzle;
+    vector<int> newPuzzle(9,0);
 
     cout << "Welcome to dlope170 8 Puzzle Solver" << endl;
 
@@ -16,7 +16,7 @@ int main() {
     cin >> userInput;
 
     if(userInput == 1) {
-        newPuzzle = {1,2,3,4,5,6,0,7,8};
+        newPuzzle = {1,2,3,4,5,0,6,7,8};
 
     }
     else if (userInput == 2) {

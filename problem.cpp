@@ -34,8 +34,8 @@ Problem* Problem::up() {
     else {
         Problem* upNode = new Problem(puzzle);
         swap(upNode->puzzle.at(location), upNode->puzzle.at(location - 3));
-        upNode->gn_cost = upNode->parent->gn_cost + 1;
         upNode->parent = this;
+        upNode->gn_cost = upNode->parent->gn_cost + 1;
         return upNode;
     }
 }
@@ -48,8 +48,8 @@ Problem* Problem::down() {
     else {
         Problem* downNode = new Problem(puzzle);
         swap(downNode->puzzle.at(location), downNode->puzzle.at(location + 3));
-        downNode->gn_cost = downNode->parent->gn_cost + 1;
         downNode->parent = this;
+        downNode->gn_cost = downNode->parent->gn_cost + 1;
         return downNode;
     }
 }
@@ -61,9 +61,9 @@ Problem* Problem::left() {
     }
     else {
         Problem* leftNode = new Problem(puzzle);
-        swap(leftNode->puzzle.at(location), leftNode->puzzle.at(location + 1));
-        leftNode->gn_cost = leftNode->parent->gn_cost + 1;
+        swap(leftNode->puzzle.at(location), leftNode->puzzle.at(location - 1));
         leftNode->parent = this;
+        leftNode->gn_cost = leftNode->parent->gn_cost + 1;
         return leftNode;
     }
 }
@@ -75,9 +75,9 @@ Problem* Problem::right() {
     }
     else {
         Problem* rightNode = new Problem(puzzle);
-        swap(rightNode->puzzle.at(location), rightNode->puzzle.at(location - 1));
-        rightNode->gn_cost = rightNode->parent->gn_cost + 1;
+        swap(rightNode->puzzle.at(location), rightNode->puzzle.at(location + 1));
         rightNode->parent = this;
+        rightNode->gn_cost = rightNode->parent->gn_cost + 1;
         return rightNode;
 
     }
