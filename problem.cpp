@@ -8,7 +8,12 @@ using namespace std;
 Problem::Problem(vector<int> newPuzzle) {
     puzzle = newPuzzle;
     gn_cost = 0;
+    hn_cost = 0;
     parent = NULL;
+    upChild = NULL;
+    downChild = NULL;
+    leftChild = NULL;
+    rightChild = NULL;
 }
 bool Problem::goalTest() {
     for(int i = 0; i < 9; i++) {
