@@ -3,5 +3,6 @@
 #include "problem.h"
 
 void uniformCostSearch(Problem* startNode);
+void aStarMisplaced(Problem* startNode); 
 
 #endif //ALGORITMS_H_

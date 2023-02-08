@@ -8,13 +8,17 @@ class Problem {
     public: 
         vector<int> puzzle;
         vector<int> goal_state = {1,2,3,4,5,6,7,8,0};
-        //cost from initial to current
         int gn_cost;
         int hn_cost;
+        int fn_cost;
+        void misplacedHeuristic();
+
         //initialize problem with new puzzle
         Problem(vector<int> newPuzzle);
+
         //check if puzzle matches goal_state
         bool goalTest();
+
         //operators
         Problem* up();
         Problem* down();

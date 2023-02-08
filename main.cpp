@@ -29,17 +29,15 @@ int main() {
             }
         }
         cout << "The puzzle you entered is" << endl;
-        cout << newPuzzle.at(0) << " ";
-        cout << newPuzzle.at(1) << " ";
-        cout << newPuzzle.at(2) << endl;
-        cout << newPuzzle.at(3) << " ";
-        cout << newPuzzle.at(4) << " ";
-        cout << newPuzzle.at(5) << endl;
-        cout << newPuzzle.at(6) << " ";
-        cout << newPuzzle.at(7) << " ";
-        cout << newPuzzle.at(8) << endl;
+        for(int p = 0; p < 9; p++) {
+            if(p = 2 || p == 5 || p == 8) {
+                cout << newPuzzle.at(p) << endl;
+            }
+            else {
+                cout << newPuzzle.at(p) << " ";
+            }
+        }
     }
-    
 
     cout << "Choose which algorithm you want to implement" << endl;
     cout << "1. Uniform Cost Search" << endl;
@@ -63,7 +61,7 @@ int main() {
 
     }
     else if(userInput == 2) {
-        //A* with the Misplaced Tile Heuristic
+        aStarMisplaced(startNode);
     }
     else if(userInput == 3) {
         //A* with the Euclidean Distance Heuristic
