@@ -30,7 +30,7 @@ int main() {
         }
         cout << "The puzzle you entered is" << endl;
         for(int p = 0; p < 9; p++) {
-            if(p = 2 || p == 5 || p == 8) {
+            if(p == 2 || p == 5 || p == 8) {
                 cout << newPuzzle.at(p) << endl;
             }
             else {
@@ -64,7 +64,7 @@ int main() {
         aStarMisplaced(startNode);
     }
     else if(userInput == 3) {
-        //A* with the Euclidean Distance Heuristic
+        aStarEuclidean(startNode);
     }
 
     return 0;

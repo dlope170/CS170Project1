@@ -12,6 +12,7 @@ class Problem {
         int hn_cost;
         int fn_cost;
         void misplacedHeuristic();
+        void euclideanDistance();
 
         //initialize problem with new puzzle
         Problem(vector<int> newPuzzle);
@@ -34,6 +35,7 @@ class Problem {
         Problem* rightChild;
 
         int findZero();
+        int findValue(int val);
 
 };
 

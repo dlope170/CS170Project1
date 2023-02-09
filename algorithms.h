@@ -4,5 +4,6 @@
 
 void uniformCostSearch(Problem* startNode);
 void aStarMisplaced(Problem* startNode); 
+void aStarEuclidean(Problem* startNode);
 
 #endif //ALGORITMS_H_

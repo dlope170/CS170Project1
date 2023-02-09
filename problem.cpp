@@ -108,3 +108,109 @@ void Problem::misplacedHeuristic() {
   }
   this->hn_cost = cnt;
 }
+int Problem::findValue(int val) {
+  int position;
+  for(int i = 0; i < puzzle.size(); i++) {
+    if(puzzle.at(i) == val) {
+      position = i;
+    }
+  }
+  return position;
+}
+void Problem::euclideanDistance() {
+  int cnt = 0;
+  for(int i = 0; i < 8; i++) {
+    if(puzzle.at(i) != goal_state.at(i)) {
+      //1 not in correct position 
+      if(i == 0){
+        int currPosition = findValue(1);
+        int currRow = currPosition/3;
+        int goalRow = 0;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 0;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+      else if(i == 1) {
+        int currPosition = findValue(2);
+        int currRow = currPosition/3;
+        int goalRow = 0;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 1;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+      else if(i == 2) {
+        int currPosition = findValue(3);
+        int currRow = currPosition/3;
+        int goalRow = 0;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 2;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+      else if(i == 3) {
+        int currPosition = findValue(4);
+        int currRow = currPosition/3;
+        int goalRow = 1;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 0;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+      else if (i == 4) {
+        int currPosition = findValue(5);
+        int currRow = currPosition/3;
+        int goalRow = 1;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 1;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+      else if(i == 5) {
+        int currPosition = findValue(6);
+        int currRow = currPosition/3;
+        int goalRow = 1;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 2;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+      else if(i == 6) {
+        int currPosition = findValue(7);
+        int currRow = currPosition/3;
+        int goalRow = 2;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 0;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+      else if(i == 7) {
+        int currPosition = findValue(8);
+        int currRow = currPosition/3;
+        int goalRow = 2;
+        int rowDifference = abs(currRow - goalRow);
+        int currColumn = currPosition % 3;
+        int goalColumn = 1;
+        int columnDifference = abs(currColumn - goalColumn);
+        int cost = rowDifference + columnDifference; 
+        cnt = cnt + cost; 
+      }
+    }
+  }
+  this->hn_cost = cnt;
+}
