@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
     int userInput = 0;
-    vector<int> newPuzzle(9,0);
+    vector<int> newPuzzle;
 
     cout << "Welcome to dlope170 8 Puzzle Solver" << endl;
 
@@ -16,12 +16,12 @@ int main() {
     cin >> userInput;
 
     if(userInput == 1) {
-        newPuzzle = {1,2,3,4,5,0,6,7,8};
+        newPuzzle = {1,2,3,4,5,8,0,6,7};
 
     }
     else if (userInput == 2) {
         for(int i = 0; i < 3; i++) {
-            cout << "Enter row " << i + 1 << " of puzzle making sure to press enter after each value" << endl;
+            cout << "Enter row " << i + 1 << " of puzzle making sure to press enter after each value and 0 to represent the blank" << endl;
             for( int j = 0; j < 3; j++){
                 int num;
                 cin >> num;
@@ -36,7 +36,7 @@ int main() {
             else {
                 cout << newPuzzle.at(p) << " ";
             }
-        }
+        } 
     }
 
     cout << "Choose which algorithm you want to implement" << endl;

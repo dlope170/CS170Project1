@@ -20,7 +20,7 @@ priority_queue<Problem*, vector<Problem*>, compare> frontier;
 vector<Problem*> exploredSet;
 
 void uniformCostSearch(Problem* initialState) {
-    int maxQueue = 0;
+    long int maxQueue = 0;
     frontier.push(initialState);
     Problem* currNode;
 
@@ -37,7 +37,7 @@ void uniformCostSearch(Problem* initialState) {
             else{
                 cout << currNode->puzzle.at(j) << " ";
             }
-        }
+        } 
         
         //if the current node matches the goal state exit while loop and return 
         if(currNode->goalTest()) {
@@ -204,7 +204,7 @@ void uniformCostSearch(Problem* initialState) {
     }
 }
 void aStarMisplaced(Problem* initialState) {
-    int maxQueue = 0;
+    long int maxQueue = 0;
     initialState->misplacedHeuristic();
     frontier.push(initialState);
     Problem* currNode;
@@ -397,7 +397,7 @@ void aStarMisplaced(Problem* initialState) {
     }
 }
 void aStarEuclidean(Problem* initialState) {
-    int maxQueue = 0;
+    long int maxQueue = 0;
     initialState->euclideanDistance();
     frontier.push(initialState);
     Problem* currNode;
